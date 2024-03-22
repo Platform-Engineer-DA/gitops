@@ -1,0 +1,13 @@
+name: Continous Integration Workflow
+
+on: [push]
+
+jobs: 
+    test:
+        runs-on: Ubuntu-lastest
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+          
+        - name: Unit Test
+          uses: Platform-Engineer-DA/central-ci-cd@main  
