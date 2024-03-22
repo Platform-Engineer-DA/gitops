@@ -10,4 +10,4 @@ jobs:
           uses: actions/checkout@v2
           
         - name: Unit Test
-          uses: Platform-Engineer-DA/central-ci-cd/.github/actions/test@main  
+          uses: Platform-Engineer-DA/central-ci-cd/tree/main/.github/actions/ci/golang/test@main
