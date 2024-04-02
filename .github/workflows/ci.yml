@@ -8,6 +8,9 @@ jobs:
         steps:
         - name: Checkout
           uses: actions/checkout@v2
-          
+
+        - name: Setup Go
+          uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/golang/setup@main
+
         - name: Unit Test
           uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/golang/test@main
