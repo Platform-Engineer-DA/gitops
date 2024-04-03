@@ -3,6 +3,7 @@ name: Continous Integration Workflow
 on: [push]
 
 jobs: 
+  
     CI:
         runs-on: ubuntu-latest
         steps:
@@ -22,11 +23,9 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v2
 
-        - name: Setup Go
-          uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/golang/setup@main
 
         - name: Build
-          uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/golang/build@main
+          uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/common/build_image@main
 
-        - name: Deploy
-          uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/golang/deploy@main
+        
+          
