@@ -37,3 +37,12 @@ jobs:
             DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
             PROJECT_NAME: ${{ env.PROJECT_NAME }}
             TAG_VERSION: ${{ env.TAG_VERSION }}      
+
+        - name: Trivy Scan
+          uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/common/scan@main
+          with:
+            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+            DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+            PROJECT_NAME: ${{ env.PROJECT_NAME }}
+            TAG_VERSION: ${{ env.TAG_VERSION }}      
+  
