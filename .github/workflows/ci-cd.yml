@@ -29,6 +29,5 @@ jobs:
           uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/common/build_image@main
           with:
             DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
-        
-          
+            DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+            PROJECT_NAME: "gitops"    
