@@ -1,6 +1,10 @@
-name: Continous Integration Workflow
+name: Workflow GitOps
 
 on: [push]
+
+env:
+  TAG_VERSION: "dev_${{ github.sha }}"
+  PROJECT_NAME: ${{ github.repository }}
 
 jobs: 
 
@@ -30,7 +34,7 @@ jobs:
           with:
             DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
             DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-            PROJECT_NAME: "gitops"
-            TAG_VERSION: "dev_${{ github.commit_id }}"
-
+            PROJECT_NAME: ${{ env.PROJECT_NAME }}
+            TAG_VERSION: ${{ env.TAG_VERSION }}
+            
 
