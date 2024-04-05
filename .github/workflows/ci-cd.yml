@@ -3,7 +3,7 @@ name: Workflow GitOps
 on: [push]
 
 env:
-  TAG_VERSION: "dev_${{ github.commit_id }}"
+  TAG_VERSION: "dev_${{ github.sha.slice(0, 7) }}"
   PROJECT_NAME: "gitops"
 
 jobs: 
