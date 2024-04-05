@@ -31,4 +31,4 @@ jobs:
             DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
             DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
             PROJECT_NAME: "gitops"
-            TAG_VERSION: ${{ github.commit.sha }}    
+            TAG_VERSION: "latest"    
