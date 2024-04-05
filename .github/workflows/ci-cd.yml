@@ -30,4 +30,5 @@ jobs:
           with:
             DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
             DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-            PROJECT_NAME: "gitops"    
+            PROJECT_NAME: "gitops"
+            TAG_VERSION: ${{ github.sha }}    
