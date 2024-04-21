@@ -4,7 +4,7 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "GitHub.copilot"
+                "Geminik/vscode-gemini"
             ]
         }
     }
