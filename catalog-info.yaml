@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: gitops-web
+  description: WebSite Gitops
+spec:
+  type: website
+  lifecycle: production
+  owner: platform
