@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha
+kind: Application
+metadata:
+  name: gitops
+  namespace: argocd
+  labels:
+    name: gitops
+spec:
+  project: gitops
+
+  source:
+    path: overlays/@ENV@/result
+    repoURL: https://github.com/Platform-Engineer-DA/gitops.git
+    targetRevision: HEAD
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: @ENV@
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+
+  retry:
+    limit: 5
+    backeoff:
+      duration: 5s
+      factor 2
+      maxduration: 3m
+
+  ignoreDifferences:
+  - group: apps
+    kind: Rollout
+    jsonpointers:
+    - /spec/replicas
+  - group: "*"
+    kind: "*"
+  revisionHistoryLimit: 10       
