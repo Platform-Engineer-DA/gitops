@@ -1,0 +1,19 @@
+name: Workflow GitOp CI
+
+on: [push]
+
+env:
+  TAG_VERSION: "dev_${{ github.run_id }}"
+  PROJECT_NAME: "gitops"
+
+jobs: 
+
+    CD:        
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+
+        - name: ArgoCD Project Sync
+          uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/argocd/oci_deploy@main
