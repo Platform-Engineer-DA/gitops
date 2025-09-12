@@ -20,10 +20,10 @@ jobs:
         - name: ArgoCD Project Sync
           uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/argocd/oci_deploy@main
           with:
-            oci_tenancy_ocid:   ${{ secrets.OCI_TENANCY_OCID }}
-            oci_user_ocid:      ${{ secrets.OCI_USER_OCID }}
-            oci_fingerprint:    ${{ secrets.OCI_FINGERPRINT }}
-            oci_region:         ${{ secrets.OCI_REGION }}
-            oci_private_key_b64: ${{ secrets.OCI_PRIVATE_KEY_B64 }}
-            oke_cluster_ocid:   ${{ secrets.OKE_CLUSTER_OCID }}
+            OCI_TENANCY_OCID:   ${{ secrets.OCI_TENANCY_OCID }}
+            OCI_USER_OCID:      ${{ secrets.OCI_USER_OCID }}
+            OCI_FINGERPINRT:    ${{ secrets.OCI_FINGERPRINT }}
+            OCI_REGION:         ${{ secrets.OCI_REGION }}
+            OCI_PRIVATE_KEY_B64: ${{ secrets.OCI_PRIVATE_KEY_B64 }}
+            OKE_CLUSTER_OCID:   ${{ secrets.OKE_CLUSTER_OCID }}
             
