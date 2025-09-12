@@ -25,5 +25,6 @@ jobs:
             OCI_FINGERPINRT:    ${{ secrets.OCI_FINGERPRINT }}
             OCI_REGION:         ${{ secrets.OCI_REGION }}
             OCI_PRIVATE_KEY_B64: ${{ secrets.OCI_PRIVATE_KEY_B64 }}
+            OCI_PRIVATE_KEY: ${{ secrets.OCI_PRIVATE_KEY }}
             OKE_CLUSTER_OCID:   ${{ secrets.OKE_CLUSTER_OCID }}
             
