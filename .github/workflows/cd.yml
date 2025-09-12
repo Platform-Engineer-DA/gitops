@@ -1,4 +1,4 @@
-name: Workflow GitOp CI
+name: Workflow GitOp CD
 
 on: [push]
 
