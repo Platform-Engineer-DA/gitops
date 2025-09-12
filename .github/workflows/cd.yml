@@ -10,6 +10,8 @@ jobs:
 
     CD:        
         runs-on: ubuntu-latest
+        permissions:
+          contents: read
 
         steps:
         - name: Checkout
@@ -17,3 +19,11 @@ jobs:
 
         - name: ArgoCD Project Sync
           uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/argocd/oci_deploy@main
+          with:
+            oci_tenancy_ocid:   ${{ secrets.OCI_TENANCY_OCID }}
+            oci_user_ocid:      ${{ secrets.OCI_USER_OCID }}
+            oci_fingerprint:    ${{ secrets.OCI_FINGERPRINT }}
+            oci_region:         ${{ secrets.OCI_REGION }}
+            oci_private_key_b64: ${{ secrets.OCI_PRIVATE_KEY_B64 }}
+            oke_cluster_ocid:   ${{ secrets.OKE_CLUSTER_OCID }}
+            
