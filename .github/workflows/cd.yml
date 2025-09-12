@@ -1,4 +1,4 @@
-name: Workflow GitOp CI-CD
+name: Workflow GitOp CI
 
 on: [push]
 
@@ -21,14 +21,6 @@ jobs:
 
         - name: Test
           uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/golang/test@main
-
-    CD:
-        runs-on: ubuntu-latest
-        needs: CI
-        steps:
-            
-        - name: Checkout
-          uses: actions/checkout@v2
     
         - name: Build Image
           uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/common/build_image@main
