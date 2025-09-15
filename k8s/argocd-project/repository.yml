@@ -1,7 +1,7 @@
 apiVersion: v1 
 stringData:
-  username: argocd
-  passoword: @GITHUB_PASS@
+  username: mcianci2024
+  passoword: ${GIT_PAT}
   project: gitops
   type: git
   url: https://github.com/Platform-Engineer-DA/gitops.git
