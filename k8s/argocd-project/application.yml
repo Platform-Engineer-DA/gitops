@@ -9,13 +9,13 @@ spec:
   project: gitops
 
   source:
-    path: overlays/@ENV@/result
+    path: overlays/${ENV}/result
     repoURL: https://github.com/Platform-Engineer-DA/gitops.git
     targetRevision: HEAD
 
   destination:
     server: https://kubernetes.default.svc
-    namespace: @ENV@
+    namespace: ${ENV}
 
   syncPolicy:
     automated:
