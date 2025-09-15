@@ -33,7 +33,7 @@ spec:
   ignoreDifferences:
   - group: apps
     kind: Rollout
-    jsonpointers:
+    jsonPointers:
     - /spec/replicas
   - group: "*"
     kind: "*"
