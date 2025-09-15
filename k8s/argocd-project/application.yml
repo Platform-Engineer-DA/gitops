@@ -28,7 +28,7 @@ spec:
       backoff:
         duration: 5s
         factor: 2
-        maxduration: 3m
+        maxDuration: 3m
 
   ignoreDifferences:
   - group: apps
