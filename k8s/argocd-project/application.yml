@@ -27,7 +27,7 @@ spec:
     limit: 5
     backeoff:
       duration: 5s
-      factor 2
+      factor: 2
       maxduration: 3m
 
   ignoreDifferences:
