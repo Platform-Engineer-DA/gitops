@@ -27,4 +27,4 @@ jobs:
             OCI_PRIVATE_KEY: ${{ secrets.OCI_PRIVATE_KEY }}
             OKE_CLUSTER_OCID:   ${{ secrets.OKE_CLUSTER_OCID }}
             GIT_PAT:            ${{ secrets.GIT_PAT }}
-            
+            ENV:              "dev" 
