@@ -23,12 +23,12 @@ spec:
       selfHeal: true
       allowEmpty: false
 
-  retry:
-    limit: 5
-    backeoff:
-      duration: 5s
-      factor: 2
-      maxduration: 3m
+    retry:
+      limit: 5
+      backeoff:
+        duration: 5s
+        factor: 2
+        maxduration: 3m
 
   ignoreDifferences:
   - group: apps
