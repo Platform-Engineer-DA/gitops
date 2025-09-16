@@ -23,5 +23,5 @@ patchesStrategicMerge:
   - patch-host.yml   
 
 configuration: 
- - Kustomize-nameref-rollouts.yml
+ - kustomize-nameref-rollouts.yml
   
