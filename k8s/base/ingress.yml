@@ -1,5 +1,5 @@
 apiVersion: networking.k8s.io/v1
-kingd: Ingress
+kind: Ingress
 metadata:
   name: myapp-ingress
   annotations:
