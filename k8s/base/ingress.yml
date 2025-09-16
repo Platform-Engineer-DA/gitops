@@ -8,7 +8,7 @@ metadata:
 spec:
   rules:
     - http:
-        host: myapp.example.com
+        host: placeholder.local
         paths:
           - path: /
             pathType: Prefix
