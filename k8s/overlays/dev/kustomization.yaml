@@ -8,7 +8,7 @@ resources:
 
 images:  
   - name: marcoscianci/gitops
-    newTag: DEV_placeholder
+    newTag: dev_placeholder
 
 namePrefix: gitops-
 
