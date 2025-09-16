@@ -19,8 +19,8 @@ labels:
     includeSelectors: true
     includeTemplates: true
 
-patchesStrategicMerge:
-  - patch-host.yml   
+patches:
+  - path: patch-host.yml   
 
 configurations: 
  - kustomize-nameref-rollouts.yml
