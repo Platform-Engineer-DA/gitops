@@ -10,7 +10,7 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: 8282
+    targetPort: 8080
   selector:
     app: gitops
     app.kubernetes.io/name: gitops
