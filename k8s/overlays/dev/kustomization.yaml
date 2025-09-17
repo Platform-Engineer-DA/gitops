@@ -7,6 +7,9 @@ resources:
 - ../../base
 
 images:
+- name: marcoscianci/gitops
+  newName: marcoscianci/gitops
+  newTag: dev_17786431356
 - name: myapp
   newName: marcoscianci/gitops
   newTag: dev_17786360950
