@@ -1,8 +1,16 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: gitops-ingress
+  name: gitops-ingress        # nome do base
 spec:
   rules:
-    - http:
-        host: gitops.codeia-ti.com.br
+    - host: gitops-dev.codeia-ti.com.br
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gitops-stable
+                port:
+                  number: 80
