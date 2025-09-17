@@ -3,27 +3,24 @@ kind: Kustomization
 
 namespace: dev
 
-resources: 
-  - ../../base 
+resources:
+- ../../base
 
-images:  
-  - name: marcoscianci/gitops
-    newTag: dev_placeholder
+images:
+- name: marcoscianci/gitops
+  newName: marcoscianci/gitops
+  newTag: dev_17786221216
 
 namePrefix: gitops-
 nameSuffix: -dev
 labels:
-  - pairs:
-      app: gitops          # <-- novo valor (antes era "myapp")
-      app.kubernetes.io/name: gitops  # (opcional) padroniza label canonical
-    includeSelectors: true
-    includeTemplates: true
+- includeSelectors: true
+  includeTemplates: true
+  pairs:
+    app: gitops
+    app.kubernetes.io/name: gitops
     
 
 patches:
-  - path: patch-host.yml
-  - path: patch-rollouts-labels.yml   
-
-# configurations: 
-#   - kustomize-nameref-rollouts.yml
-
+- path: patch-host.yml
+- path: patch-rollouts-labels.yml
