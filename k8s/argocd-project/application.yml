@@ -9,7 +9,7 @@ spec:
   project: gitops
 
   source:
-    path: overlays/${ENV}
+    path: overlays/${ENV}/result
     repoURL: https://github.com/Platform-Engineer-DA/gitops.git
     targetRevision: HEAD
 
