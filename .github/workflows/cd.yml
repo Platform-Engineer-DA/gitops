@@ -20,6 +20,8 @@ jobs:
         steps:
         - name: Checkout
           uses: actions/checkout@v4
+          with:
+              persist-credentials: false
 
         - name: ArgoCD Project Sync
           uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/argocd/oci_deploy@main
