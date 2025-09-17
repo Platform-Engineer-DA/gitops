@@ -7,7 +7,8 @@ resources:
   - ../../base 
 
 images:  
-  - name: marcoscianci/gitops
+  - name: myapp
+    newName: marcoscianci/gitops
     newTag: dev_placeholder
 
 namePrefix: gitops-
@@ -21,17 +22,8 @@ labels:
     
 
 patches:
-  - path: patch-host.yml   
-  - target:
-      kind: Rollout
-      name: "gitops-rollout-dev"
-    patch: |-
-      - op: replace
-        path: /spec/selector/matchLabels/app
-        value: gitops
-      - op: replace
-        path: /spec/template/metadata/labels/app
-        value: gitops
+  - path: patch-host.yml
+  - path: patch-rollouts-labels.yml   
 
 configurations: 
   - kustomize-nameref-rollouts.yml
