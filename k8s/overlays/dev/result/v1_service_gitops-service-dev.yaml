@@ -4,7 +4,7 @@ metadata:
   labels:
     app: gitops
     app.kubernetes.io/name: gitops
-  name: gitops-stable-dev
+  name: gitops-service-dev
   namespace: dev
 spec:
   ports:

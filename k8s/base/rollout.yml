@@ -10,11 +10,6 @@ spec:
       app: myapp
   strategy:
     canary:
-      canaryService: canary
-      stableService: stable 
-      trafficRouting:
-        nginx:
-          stableIngress: ingress
       steps:
         - setWeight: 10
         - pause: {duration: 60s}

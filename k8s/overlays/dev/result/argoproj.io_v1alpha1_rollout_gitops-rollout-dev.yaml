@@ -14,8 +14,6 @@ spec:
       app: gitops
   strategy:
     canary:
-      canaryService: gitops-canary-dev
-      stableService: gitops-stable-dev
       steps:
       - setWeight: 10
       - pause:
@@ -27,9 +25,6 @@ spec:
       - pause:
           duration: 180s
       - setWeight: 100
-      trafficRouting:
-        nginx:
-          stableIngress: gitops-ingress-dev
   template:
     metadata:
       labels:

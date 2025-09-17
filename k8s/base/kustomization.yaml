@@ -6,6 +6,5 @@ namespace: myapp
 resources: 
   - namespace.yml
   - rollout.yml
-  - service-stable.yml
-  - service-canary.yml
+  - service.yml
   - ingress.yml  

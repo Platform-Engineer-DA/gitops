@@ -25,6 +25,6 @@ patches:
   - path: patch-host.yml
   - path: patch-rollouts-labels.yml   
 
-configurations: 
-  - kustomize-nameref-rollouts.yml
+# configurations: 
+#   - kustomize-nameref-rollouts.yml
 
