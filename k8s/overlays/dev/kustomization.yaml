@@ -9,7 +9,7 @@ resources:
 images:
 - name: marcoscianci/gitops
   newName: marcoscianci/gitops
-  newTag: dev_17786260398
+  newTag: dev_17786313518
 
 namePrefix: gitops-
 nameSuffix: -dev
