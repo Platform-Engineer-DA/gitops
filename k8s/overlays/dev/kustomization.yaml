@@ -11,7 +11,7 @@ images:
     newTag: dev_placeholder
 
 namePrefix: gitops-
-
+nameSuffix: -dev
 labels:
   - pairs:
       app: gitops          # <-- novo valor (antes era "myapp")
@@ -21,7 +21,14 @@ labels:
 
 patches:
   - path: patch-host.yml   
+  # - target:
+  #     kind: Rollout
+  #     name: "myapp-rollout"
+  #   patch: |-
+  #     - op: replace
+  #       path: /metadata/name
+  #       value: gitops-rollout
 
 configurations: 
   - kustomize-nameref-rollouts.yml
-  
+
