@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -25,7 +26,7 @@ func getPort() string {
 func main() {
 	welcome := Welcome{"GITOPS", time.Now().Format(time.Stamp), os.Getenv("HOSTNAME")}
 
-	templates := template.Must(template.ParseFiles("templates/welcome-template.html"))
+	templates := template.Must(template.ParseFS(tmpFS,"templates/welcome-template.html"))
 
 	http.Handle("/static/",
 		http.StripPrefix("/static/",
