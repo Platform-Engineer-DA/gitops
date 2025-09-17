@@ -31,7 +31,7 @@ spec:
         app: gitops
     spec:
       containers:
-      - image: myapp:latest
+      - image: marcoscianci/gitops:dev_17786360950
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
