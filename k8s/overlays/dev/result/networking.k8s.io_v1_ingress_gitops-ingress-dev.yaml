@@ -15,7 +15,7 @@ spec:
       paths:
       - backend:
           service:
-            name: stable
+            name: gitops-service-dev
             port:
               number: 80
         path: /
