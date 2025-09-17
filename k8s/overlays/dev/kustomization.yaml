@@ -9,7 +9,7 @@ resources:
 images:
 - name: marcoscianci/gitops
   newName: marcoscianci/gitops
-  newTag: dev_17807171555
+  newTag: dev_17807249381
 - name: myapp
   newName: marcoscianci/gitops
   newTag: dev_17787007386
