@@ -6,7 +6,9 @@ spec:
   selector:
     matchLabels:
       app: gitops
+      app.kubernetes.io/name: gitops
   template:
     metadata:
       labels:
         app: gitops
+        app.kubernetes.io/name: gitops

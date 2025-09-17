@@ -12,6 +12,7 @@ spec:
   selector:
     matchLabels:
       app: gitops
+      app.kubernetes.io/name: gitops
   strategy:
     canary:
       steps:
@@ -29,6 +30,7 @@ spec:
     metadata:
       labels:
         app: gitops
+        app.kubernetes.io/name: gitops
     spec:
       containers:
       - image: marcoscianci/gitops:dev_17787007386
