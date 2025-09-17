@@ -31,7 +31,7 @@ spec:
         app: gitops
     spec:
       containers:
-      - image: marcoscianci/gitops:dev_17786360950
+      - image: marcoscianci/gitops:dev_17786680663
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:

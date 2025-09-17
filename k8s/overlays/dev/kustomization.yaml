@@ -10,8 +10,6 @@ images:
 - name: myapp
   newName: marcoscianci/gitops
   newTag: dev_17786680663
-  newName: marcoscianci/gitops
-  newTag: dev_17786360950
 
 namePrefix: gitops-
 nameSuffix: -dev
