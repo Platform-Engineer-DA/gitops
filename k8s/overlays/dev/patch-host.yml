@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: myapp-ingress        # nome do base
+  name: ingress        # nome do base
 spec:
   rules:
     - host: gitops-dev.codeia-ti.com.br
@@ -11,6 +11,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: myapp-stable
+                name: stable
                 port:
                   number: 80

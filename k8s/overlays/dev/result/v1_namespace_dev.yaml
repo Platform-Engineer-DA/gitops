@@ -4,5 +4,5 @@ metadata:
   labels:
     app: gitops
     app.kubernetes.io/name: gitops
-    instion-injection: disabled
+    istio-injection: disabled
   name: dev

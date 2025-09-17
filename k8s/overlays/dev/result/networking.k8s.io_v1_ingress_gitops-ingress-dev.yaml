@@ -6,7 +6,7 @@ metadata:
   labels:
     app: gitops
     app.kubernetes.io/name: gitops
-  name: gitops-myapp-ingress
+  name: gitops-ingress-dev
   namespace: dev
 spec:
   rules:
@@ -15,7 +15,7 @@ spec:
       paths:
       - backend:
           service:
-            name: gitops-myapp-stable
+            name: gitops-stable-dev
             port:
               number: 80
         path: /
