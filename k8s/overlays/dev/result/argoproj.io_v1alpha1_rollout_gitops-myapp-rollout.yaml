@@ -1,0 +1,63 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  labels:
+    app: gitops
+    app.kubernetes.io/name: gitops
+  name: gitops-myapp-rollout
+  namespace: dev
+spec:
+  replicas: 3
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: myapp
+  strategy:
+    canary:
+      canaryService: gitops-myapp-canary
+      stableService: gitops-myapp-stable
+      steps:
+      - setWeight: 10
+      - pause:
+          duration: 60s
+      - setWeight: 30
+      - pause:
+          duration: 120s
+      - setWeight: 50
+      - pause:
+          duration: 180s
+      - setWeight: 100
+      trafficRouting:
+        nginx:
+          stableIngress: gitops-myapp-ingress
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - image: myapp:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8282
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        name: myapp
+        ports:
+        - containerPort: 8282
+          name: http
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8282
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi

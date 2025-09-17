@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: gitops
+    app.kubernetes.io/name: gitops
+  name: gitops-myapp-stable
+  namespace: dev
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8282
+  selector:
+    app: gitops
+    app.kubernetes.io/name: gitops
+  type: ClusterIP

@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    app: gitops
+    app.kubernetes.io/name: gitops
+  name: gitops-myapp-ingress
+  namespace: dev
+spec:
+  rules:
+  - host: gitops-dev.codeia-ti.com.br
+    http:
+      paths:
+      - backend:
+          service:
+            name: gitops-myapp-stable
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
