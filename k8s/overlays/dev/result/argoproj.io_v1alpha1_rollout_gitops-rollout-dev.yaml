@@ -33,10 +33,10 @@ spec:
   template:
     metadata:
       labels:
-        app: myapp
+        app: gitops
     spec:
       containers:
-      - image: myapp:latest
+      - image: marcoscianci/gitops:dev_placeholder
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
