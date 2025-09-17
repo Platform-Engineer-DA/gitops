@@ -11,7 +11,7 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: myapp
+      app: gitops
   strategy:
     canary:
       canaryService: gitops-canary-dev

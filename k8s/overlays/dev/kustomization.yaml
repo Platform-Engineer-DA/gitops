@@ -18,16 +18,20 @@ labels:
       app.kubernetes.io/name: gitops  # (opcional) padroniza label canonical
     includeSelectors: true
     includeTemplates: true
+    
 
 patches:
   - path: patch-host.yml   
-  # - target:
-  #     kind: Rollout
-  #     name: "myapp-rollout"
-  #   patch: |-
-  #     - op: replace
-  #       path: /metadata/name
-  #       value: gitops-rollout
+  - target:
+      kind: Rollout
+      name: "gitops-rollout-dev"
+    patch: |-
+      - op: replace
+        path: /spec/selector/matchLabels/app
+        value: gitops
+      - op: replace
+        path: /spec/template/metadata/labels/app
+        value: gitops
 
 configurations: 
   - kustomize-nameref-rollouts.yml
