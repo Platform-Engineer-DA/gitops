@@ -1,13 +1,11 @@
 FROM golang:1.24.6-bullseye AS builder
-WORKDIR /app
 
+WORKDIR /app
 # Cache dependencies
 COPY go.mod ./
 RUN go mod download
-
 # Build the application
 COPY . .
-
 # Build for Linux with CGO disabled
 ENV CGO_ENABLED=0
 RUN GOOS=linux GOARCH=amd64 \ 
@@ -17,6 +15,7 @@ RUN GOOS=linux GOARCH=amd64 \
 FROM gcr.io/distroless/static-debian12:nonroot
 WORKDIR /app
 LABEL maintaner="Marcos Cianci <marcos.cianci@gmail.com>"
+COPY . . 
 COPY --from=builder /app/gitops /app/gitops
 EXPOSE 8282
 USER nonroot:nonroot
