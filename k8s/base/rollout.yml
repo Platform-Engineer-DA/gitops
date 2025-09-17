@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout 
 metadata:
-  name: myapp-rollout
+  name: rollout
 spec:
   replicas: 3
   revisionHistoryLimit: 2
@@ -10,11 +10,11 @@ spec:
       app: myapp
   strategy:
     canary:
-      canaryService: myapp-canary
-      stableService: myapp-stable 
+      canaryService: canary
+      stableService: stable 
       trafficRouting:
         nginx:
-          stableIngress: myapp-ingress
+          stableIngress: ingress
       steps:
         - setWeight: 10
         - pause: {duration: 60s}
