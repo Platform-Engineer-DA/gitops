@@ -57,6 +57,10 @@ jobs:
               TAG_VERSION="${PREFIX}${RUN_ID}"
               IMAGE=${{ secrets.DOCKER_USERNAME}}/${{ env.PROJECT_NAME }}:${TAG_VERSION}
 
+              echo "ENV=${ENV}"
+              echo "TAG_VERSION=${TAG_VERSION}"
+              echo "IMAGE=${IMAGE}"
+
               {
               echo "env=${ENV}"
               echo "tag_version=${TAG_VERSION}"
