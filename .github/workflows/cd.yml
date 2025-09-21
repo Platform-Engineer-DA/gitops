@@ -2,7 +2,9 @@ name: Workflow GitOp CI-CD
 
 on: 
   pull_request:
-    branches: [ develop, 'release/**'] 
+    branches: [ develop, 'release/**']
+  push: 
+    branches: [ main ]
 
 env:
   PROJECT_NAME: "gitops"
