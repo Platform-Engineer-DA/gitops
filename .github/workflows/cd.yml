@@ -1,11 +1,8 @@
 name: Workflow GitOp CI-CD 
 
 on: 
-  push:
-    branches: [ develop, main, 'release/**' ]
-    tags: [ 'v*']
   pull_request:
-    branches: [ develop, 'release/**', 'v*'] 
+    branches: [ develop, 'release/**'] 
 
 env:
   PROJECT_NAME: "gitops"
@@ -16,7 +13,7 @@ concurrency:
 
 jobs: 
 
-  CI:        
+  CD:        
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -37,6 +34,9 @@ jobs:
               REF="${GITHUB_REF}"
               RUN_ID="${GITHUB_RUN_ID}"
 
+              echo $REF
+              echo $RUN_ID
+
               if [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/head/develop' ]]; then
                 ENV=dev
                 PREFIX=dev_
@@ -44,7 +44,7 @@ jobs:
                 ENV=stg
                 PREFIX=stg_
               elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/head/hotfix/*' ]]; then
-                ENV=pro'
+                ENV=prod
                 PREFIX=prod_
               fi
 
