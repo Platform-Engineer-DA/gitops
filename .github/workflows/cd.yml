@@ -2,7 +2,7 @@ name: Workflow GitOp CI-CD
 
 on: 
   push:
-    branches: [ develop, main, 'feature/**', 'hotfix/**', 'release/**' ]
+    branches: [ develop, main, 'release/**' ]
     tags: [ 'v*']
   pull_request:
     branches: [ develop, 'release/**', 'v*'] 
@@ -37,19 +37,19 @@ jobs:
               REF="${GITHUB_REF}"
               RUN_ID="${GITHUB_RUN_ID}"
 
-              if [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == refs/head/develop' ]]; then
+              if [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/head/develop' ]]; then
                 ENV=dev
                 PREFIX=dev_
-              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == refs/head/release/*' ]]; then
+              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/head/release/*' ]]; then
                 ENV=stg
                 PREFIX=stg_
-              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == refs/head/hotfix/*' ]]; then
-                ENV=prod
+              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/head/hotfix/*' ]]; then
+                ENV=pro'
                 PREFIX=prod_
-              elif [[ "${REF}" == refs/head/feature/*' || "${REF}" == refs/head/develop' ]]; then
+              elif [[ "${REF}" == 'refs/head/feature/*' || "${REF}" == 'refs/head/develop' ]]; then
                 ENV=dev
                 PREFIX=dev_  
-              elif [[ "${REF}" == refs/head/release/*' ]]; then
+              elif [[ "${REF}" == 'refs/head/release/*' ]]; then
                 ENV=stg
                 PREFIX=stg_
               fi
