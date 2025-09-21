@@ -46,12 +46,6 @@ jobs:
               elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/head/hotfix/*' ]]; then
                 ENV=pro'
                 PREFIX=prod_
-              elif [[ "${REF}" == 'refs/head/feature/*' || "${REF}" == 'refs/head/develop' ]]; then
-                ENV=dev
-                PREFIX=dev_  
-              elif [[ "${REF}" == 'refs/head/release/*' ]]; then
-                ENV=stg
-                PREFIX=stg_
               fi
 
               TAG_VERSION="${PREFIX}${RUN_ID}"
@@ -66,12 +60,6 @@ jobs:
               echo "tag_version=${TAG_VERSION}"
               echo "image=${IMAGE}"
               } >> "${GITHUB_OUTPUT}"
-
-      - name: Setup Go
-        uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/golang/setup@main
-
-      - name: Test
-        uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/golang/test@main
     
       - name: Build Image
         uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/common/build_image@main
