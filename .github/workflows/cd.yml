@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [ develop, 'release/**']
   push: 
-    branches: [ main ]
+    branches: [ develop ]
 
 env:
   PROJECT_NAME: "gitops"
