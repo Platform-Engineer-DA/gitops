@@ -1,0 +1,110 @@
+name: Workflow GitOp CI-CD 
+
+on: 
+  push:
+    branches: [ develop, main, 'feature/**', 'hotfix/**', 'release/**' ]
+    tags: [ 'v*']
+  pull_request:
+    branches: [ develop, 'release/**', 'v*'] 
+
+env:
+  PROJECT_NAME: "gitops"
+
+concurrency:
+  group: ci-cd-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs: 
+
+  CI:        
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    outputs:
+      ENV: ${{ steps.meta.outputs.env }}
+      TAG_VERSION: ${{ steps.meta.outputs.tag_version }}
+      IMAGE: ${{ steps.meta.outputs.image }}    
+        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: ENV & TAG
+        id: meta 
+        shell: bash
+        run: |
+              REF="${GITHUB_REF}"
+              RUN_ID="${GITHUB_RUN_ID}"
+
+              if [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == refs/head/develop' ]]; then
+                ENV=dev
+                PREFIX=dev_
+              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == refs/head/release/*' ]]; then
+                ENV=stg
+                PREFIX=stg_
+              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == refs/head/hotfix/*' ]]; then
+                ENV=prod
+                PREFIX=prod_
+              elif [[ "${REF}" == refs/head/feature/*' || "${REF}" == refs/head/develop' ]]; then
+                ENV=dev
+                PREFIX=dev_  
+              elif [[ "${REF}" == refs/head/release/*' ]]; then
+                ENV=stg
+                PREFIX=stg_
+              fi
+
+              TAG_VERSION="${PREFIX}${RUN_ID}"
+              IMAGE=${{ secrets.DOCKER_USERNAME}}/${{ env.PROJECT_NAME }}:${TAG_VERSION}
+
+              {
+              echo "env=${ENV}"
+              echo "tag_version=${TAG_VERSION}"
+              echo "image=${IMAGE}"
+              } >> "${GITHUB_OUTPUT}"
+
+      - name: Setup Go
+        uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/golang/setup@main
+
+      - name: Test
+        uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/golang/test@main
+    
+      - name: Build Image
+        uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/common/build_image@main
+        with:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          PROJECT_NAME: ${{ env.PROJECT_NAME }}
+          TAG_VERSION: ${{ steps.meta.outputs.tag_version }}      
+
+      - name: Trivy Scan
+        uses: Platform-Engineer-DA/central-ci-cd/.github/actions/ci/common/sec/trivy@main
+        with:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          PROJECT_NAME: ${{ env.PROJECT_NAME }}
+          TAG_VERSION: ${{ steps.meta.outputs.tag_version }}      
+    
+    # CD:
+    #     needs: [CI]     
+    #     runs-on: ubuntu-latest
+    #     permissions:
+    #       contents: read
+
+    #     steps:
+    #     - name: Checkout
+    #       uses: actions/checkout@v4
+    #       with:
+    #           persist-credentials: false
+
+    #     - name: ArgoCD Project Sync
+    #       uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/argocd/oci_deploy@main
+    #       with:
+    #         OCI_TENANCY_OCID:   ${{ secrets.OCI_TENANCY_OCID }}
+    #         OCI_USER_OCID:      ${{ secrets.OCI_USER_OCID }}
+    #         OCI_FINGERPRINT:    ${{ secrets.OCI_FINGERPRINT }}
+    #         OCI_REGION:         ${{ secrets.OCI_REGION }}
+    #         OCI_PRIVATE_KEY: ${{ secrets.OCI_PRIVATE_KEY }}
+    #         OKE_CLUSTER_OCID:   ${{ secrets.OKE_CLUSTER_OCID }}
+    #         GIT_PAT:            ${{ secrets.GIT_PAT }}
+    #         ENV:              "dev"         
