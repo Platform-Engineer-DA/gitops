@@ -40,14 +40,17 @@ jobs:
               echo $RUN_ID
 
               if [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/develop' ]]; then
-                ENV=dev
-                PREFIX=dev_
+                ENV="dev"
+                PREFIX="dev_"
               elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/release/*' ]]; then
-                ENV=stg
-                PREFIX=stg_
+                ENV="stg"
+                PREFIX="stg_"
               elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/hotfix/*' ]]; then
-                ENV=prod
-                PREFIX=prod_
+                ENV="prod"
+                PREFIX="prod_""
+              if [[ "${REF}" == 'refs/heads/develop' ]]; then
+                ENV="dev"
+                PREFIX="dev_"
               fi
 
               TAG_VERSION="${PREFIX}${RUN_ID}"
