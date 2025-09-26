@@ -39,13 +39,13 @@ jobs:
               echo $REF
               echo $RUN_ID
 
-              if [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/head/develop' ]]; then
+              if [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/develop' ]]; then
                 ENV=dev
                 PREFIX=dev_
-              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/head/release/*' ]]; then
+              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/release/*' ]]; then
                 ENV=stg
                 PREFIX=stg_
-              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/head/hotfix/*' ]]; then
+              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/hotfix/*' ]]; then
                 ENV=prod
                 PREFIX=prod_
               fi
@@ -54,6 +54,7 @@ jobs:
               IMAGE=${{ secrets.DOCKER_USERNAME}}/${{ env.PROJECT_NAME }}:${TAG_VERSION}
 
               echo "ENV=${ENV}"
+              echo "PREFIX"=${PREFIX}
               echo "TAG_VERSION=${TAG_VERSION}"
               echo "IMAGE=${IMAGE}"
 
