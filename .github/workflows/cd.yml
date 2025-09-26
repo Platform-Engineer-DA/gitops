@@ -47,7 +47,7 @@ jobs:
                 PREFIX="stg_"
               elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/hotfix/*' ]]; then
                 ENV="prod"
-                PREFIX="prod_""
+                PREFIX="prod_"
               if [[ "${REF}" == 'refs/heads/develop' ]]; then
                 ENV="dev"
                 PREFIX="dev_"
