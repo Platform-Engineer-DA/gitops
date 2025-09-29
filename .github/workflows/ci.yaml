@@ -2,7 +2,7 @@ name: Workflow GitOp CI
 
 on: 
     push:
-        branches: [ 'feature/**', 'hotfix/**' ]
+        branches: [ 'feature/**', develop, main, 'release/**', 'hotfix/**' ]
 
 env:
     PROJECT_NAME: "gitops"
