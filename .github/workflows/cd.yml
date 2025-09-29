@@ -1,10 +1,8 @@
-name: Workflow GitOp CI-CD 
+name: Workflow GitOps CI-CD 
 
 on: 
   pull_request:
-    branches: [ develop, 'release/**']
-  push: 
-    branches: [ develop ]
+    branches: [ develop, 'release/**', 'hotfix/**' ]
 
 env:
   PROJECT_NAME: "gitops"
@@ -45,12 +43,12 @@ jobs:
               elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/release/*' ]]; then
                 ENV="stg"
                 PREFIX="stg_"
+              elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/main' ]]; then
+                ENV="prod"
+                PREFIX="prod_"
               elif [[ "${GITHUB_EVENT_NAME}" == "pull_request" && "${REF}" == 'refs/heads/hotfix/*' ]]; then
                 ENV="prod"
                 PREFIX="prod_"
-              elif [[ "${REF}" == 'refs/heads/develop' ]]; then
-                ENV="dev"
-                PREFIX="dev_"
               fi
 
               TAG_VERSION="${PREFIX}${RUN_ID}"
@@ -95,14 +93,15 @@ jobs:
     #       with:
     #           persist-credentials: false
 
-    #     - name: ArgoCD Project Sync
-    #       uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/argocd/oci_deploy@main
-    #       with:
-    #         OCI_TENANCY_OCID:   ${{ secrets.OCI_TENANCY_OCID }}
-    #         OCI_USER_OCID:      ${{ secrets.OCI_USER_OCID }}
-    #         OCI_FINGERPRINT:    ${{ secrets.OCI_FINGERPRINT }}
-    #         OCI_REGION:         ${{ secrets.OCI_REGION }}
-    #         OCI_PRIVATE_KEY: ${{ secrets.OCI_PRIVATE_KEY }}
-    #         OKE_CLUSTER_OCID:   ${{ secrets.OKE_CLUSTER_OCID }}
-    #         GIT_PAT:            ${{ secrets.GIT_PAT }}
-    #         ENV:              "dev"         
+      - name: ArgoCD Deploy 
+        uses: Platform-Engineer-DA/central-ci-cd/.github/actions/cd/argocd/oci_deploy@main
+        with:
+            OCI_TENANCY_OCID:   ${{ secrets.OCI_TENANCY_OCID }}
+            OCI_USER_OCID:      ${{ secrets.OCI_USER_OCID }}
+            OCI_FINGERPRINT:    ${{ secrets.OCI_FINGERPRINT }}
+            OCI_REGION:         ${{ secrets.OCI_REGION }}
+            OCI_PRIVATE_KEY:    ${{ secrets.OCI_PRIVATE_KEY }}
+            OKE_CLUSTER_OCID:   ${{ secrets.OKE_CLUSTER_OCID }}
+            GIT_PAT:            ${{ secrets.GIT_PAT }}
+            TAG_VERSION:        ${{ steps.meta.outputs.tag_version }}
+            
